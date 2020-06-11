@@ -1,0 +1,22 @@
+10.128.0.2
+35.222.123.6
+
+Welcome to Cloud Shell! Type "help" to get started.
+Your Cloud Platform project in this session is set to qwiklabs-gcp-01-976c61794b3c.
+Use “gcloud config set project [PROJECT_ID]” to change to a different project.
+student_01_2cd723eee1dc@cloudshell:~ (qwiklabs-gcp-01-976c61794b3c)$ export LOCATION=US
+student_01_2cd723eee1dc@cloudshell:~ (qwiklabs-gcp-01-976c61794b3c)$ gsutil mb -l $LOCATION gs://$DEVSHELL_PROJECT_ID
+Creating gs://qwiklabs-gcp-01-976c61794b3c/...
+student_01_2cd723eee1dc@cloudshell:~ (qwiklabs-gcp-01-976c61794b3c)$ gsutil cp gs://cloud-training/gcpfci/my-excellent-blog.png my-excellent-blog.png
+Copying gs://cloud-training/gcpfci/my-excellent-blog.png...
+/ [1 files][  8.2 KiB/  8.2 KiB]
+Operation completed over 1 objects/8.2 KiB.
+student_01_2cd723eee1dc@cloudshell:~ (qwiklabs-gcp-01-976c61794b3c)$ gsutil cp my-excellent-blog.png gs://$DEVSHELL_PROJECT_ID/my-excellent-blog.png
+Copying file://my-excellent-blog.png [Content-Type=image/png]...
+/ [1 files][  8.2 KiB/  8.2 KiB]
+Operation completed over 1 objects/8.2 KiB.
+student_01_2cd723eee1dc@cloudshell:~ (qwiklabs-gcp-01-976c61794b3c)$ gsutil acl ch -u allUsers:R gs://$DEVSHELL_PROJECT_ID/my-excellent-blog.png
+Updated ACL on gs://qwiklabs-gcp-01-976c61794b3c/my-excellent-blog.png
+
+
+Public IP address : 35.188.89.59
