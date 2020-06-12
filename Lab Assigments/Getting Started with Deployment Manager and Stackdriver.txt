@@ -1,0 +1,57 @@
+    machineType: zones/us-central1-a/machineTypes/n1-standard-1
+        value: "apt-get update"
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-9-stretch-v20180806
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-071792fd3684/global/networks/default
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ gcloud deployment-manager deployments create my-first-depl --config mydeploy.yaml
+The fingerprint of the deployment is b'4Q8CgA5xN7g36Vee_fnJIQ=='
+Waiting for create [operation-1590091067388-5a62ded3b721e-1c17e7bb-9cab83ed]...done.
+WARNING: Create operation operation-1590091067388-5a62ded3b721e-1c17e7bb-9cab83ed completed with warnings:
+---
+code: EXTERNAL_API_WARNING
+data:
+- key: resource_name
+  value: projects/debian-cloud/global/images/debian-9-stretch-v20180806
+- key: replacement_suggestion
+  value: A suggested replacement is 'projects/debian-cloud/global/images/debian-9-stretch-v20180814'.
+message: The resource 'projects/debian-cloud/global/images/debian-9-stretch-v20180806'
+  is deprecated. A suggested replacement is 'projects/debian-cloud/global/images/debian-9-stretch-v20180814'.
+NAME   TYPE                 STATE      ERRORS  INTENT
+my-vm  compute.v1.instance  COMPLETED  []
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ nano mydeploy.yaml
+Use "fg" to return to nano.
+[1]+  Stopped                 nano mydeploy.yaml
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ nano mydeploy.yaml
+Use "fg" to return to nano.
+[2]+  Stopped                 nano mydeploy.yaml
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ fg
+nano mydeploy.yaml
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ gcloud deployment-manager deployments update my-first-depl --config mydeploy.yaml
+ERROR: (gcloud.deployment-manager.deployments.update) Failed to parse YAML: expected '<document start>', but found '<block sequence start>'
+  in "<unicode string>", line 2, column 1:
+    - name: my-vm
+    ^ (line: 2)
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ nano mydeploy.yaml
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ gcloud deployment-manager deployments update my-first-depl --config mydeploy.yaml                                            
+The fingerprint of the deployment is b'3zEzbgcZRj5v4-W172TXUQ=='
+Waiting for update [operation-1590091434494-5a62e031d0908-c9809a97-b555aaf8]...done.
+Update operation operation-1590091434494-5a62e031d0908-c9809a97-b555aaf8 completed successfully.
+NAME   TYPE                 STATE      ERRORS  INTENT
+my-vm  compute.v1.instance  COMPLETED  []
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ nano mydeploy.yaml
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$ gcloud deployment-manager deployments update my-first-depl --config mydeploy.yaml
+The fingerprint of the deployment is b'MPxVUAIEhLMueX0OoPcyQQ=='
+Waiting for update [operation-1590091687318-5a62e122ed460-5f7e33a4-5c18de8b]...done.
+Update operation operation-1590091687318-5a62e122ed460-5f7e33a4-5c18de8b completed successfully.
+NAME   TYPE                 STATE      ERRORS  INTENT
+my-vm  compute.v1.instance  COMPLETED  []
+student_01_c89eee83dd29@cloudshell:~ (qwiklabs-gcp-01-071792fd3684)$
