@@ -1,0 +1,40 @@
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl version
+Client Version: version.Info{Major:"1", Minor:"18", GitVersion:"v1.18.2", GitCommit:"52c56ce7a8272c798dbc29846288d7cd9fbae032", GitTreeState:"clean", BuildDate:"2020-04-16T11:56:40Z", GoVersion:
+"go1.13.9", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"14+", GitVersion:"v1.14.10-gke.36", GitCommit:"34a615f32e9a0c9e97cdb9f749adb392758349a6", GitTreeState:"clean", BuildDate:"2020-04-06T16:33:17Z", G
+oVersion:"go1.12.12b4", Compiler:"gc", Platform:"linux/amd64"}
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl create deploy nginx --image=nginx:1.17.10
+deployment.apps/nginx created
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl get pods
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-6cc5778b4d-hwwtw   1/1     Running   0          19s
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl expose deployment nginx --port 80 --type LoadBalancer
+service/nginx exposed
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP      10.51.240.1     <none>        443/TCP        117s
+nginx        LoadBalancer   10.51.250.105   <pending>     80:30743/TCP   9s
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
+kubernetes   ClusterIP      10.51.240.1     <none>           443/TCP        4m33s
+nginx        LoadBalancer   10.51.250.105   35.223.184.104   80:30743/TCP   2m45s
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
+kubernetes   ClusterIP      10.51.240.1     <none>           443/TCP        4m47s
+nginx        LoadBalancer   10.51.250.105   35.223.184.104   80:30743/TCP   2m59s
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl scale deployment nginx --replicas 3
+deployment.extensions/nginx scaled
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl get pods
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-6cc5778b4d-hwwtw   1/1     Running   0          4m7s
+nginx-6cc5778b4d-px4wt   1/1     Running   0          16s
+nginx-6cc5778b4d-tcgwd   1/1     Running   0          16s
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
+kubernetes   ClusterIP      10.51.240.1     <none>           443/TCP        5m29s
+nginx        LoadBalancer   10.51.250.105   35.223.184.104   80:30743/TCP   3m41s
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$ kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
+kubernetes   ClusterIP      10.51.240.1     <none>           443/TCP        5m56s
+nginx        LoadBalancer   10.51.250.105   35.223.184.104   80:30743/TCP   4m8s
+student_04_332b97deba21@cloudshell:~ (qwiklabs-gcp-04-178d95fe324f)$
